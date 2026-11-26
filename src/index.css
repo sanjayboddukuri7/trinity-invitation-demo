@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Default (Trinity gold) theme; each invitation model overrides these on <html>. */
+:root {
+  --ink: 33 24 18;
+  --ink-soft: 74 60 50;
+  --ink-muted: 125 110 98;
+  --paper: 251 245 234;
+  --line: 233 220 200;
+  --brand: 232 163 61;
+  --brand-dark: 184 116 26;
+  --brand-soft: 251 241 224;
+  --accent: 246 198 107;
+  --accent-soft: 253 246 230;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-script: 'Great Vibes', cursive;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper text-ink antialiased font-sans;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand ring-offset-2;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 h-11 text-sm font-semibold whitespace-nowrap
+      transition-[background-color,color,transform,box-shadow] duration-150 active:scale-[0.98] disabled:opacity-60;
+  }
+  .btn-primary {
+    @apply btn bg-brand text-white hover:bg-brand-dark shadow-glow;
+  }
+  .btn-soft {
+    @apply btn bg-brand-soft text-brand-dark hover:bg-brand/15;
+  }
+  .btn-ghost {
+    @apply btn bg-white text-ink border border-line hover:border-ink/30;
+  }
+  .wrap {
+    @apply max-w-6xl mx-auto px-5 sm:px-8;
+  }
+  .card {
+    @apply bg-white/90 border border-line rounded-3xl shadow-soft;
+  }
+}
+
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+.spin-slow { animation: spin-slow 60s linear infinite; }
+@keyframes float { 50% { transform: translateY(-8px); } }
+.float { animation: float 5s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .spin-slow, .float { animation: none; }
+}
